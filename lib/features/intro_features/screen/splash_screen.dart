@@ -16,6 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   final SplashController splashController = Get.put(SplashController());
   @override
   Widget build(BuildContext context) {
+    splashController.initApp();
     return Scaffold(
       backgroundColor: primaryColor,
       body: Center(

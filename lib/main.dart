@@ -40,10 +40,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
         translations: AppTranslation(),
-        locale: const Locale('en', 'US'),
+        locale: LanguageService().currentLocale,
         fallbackLocale: const Locale('fa', 'IR'),
         darkTheme: darkTheme,
-        initialRoute: '/auth',
+        initialRoute: '/home',
         getPages: [
           GetPage(name: '/', page: () => const SplashScreen()),
           GetPage(name: '/home', page: () => HomeScreen()),

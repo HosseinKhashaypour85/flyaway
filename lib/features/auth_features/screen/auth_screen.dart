@@ -4,14 +4,17 @@ import 'package:flyaway/config/app_config/app_colors/app_colors.dart';
 import 'package:flyaway/config/app_config/app_localization_config/language_service.dart';
 import 'package:flyaway/config/app_config/app_shapes/border_radius.dart';
 import 'package:flyaway/config/app_config/app_shapes/media_query.dart';
+import 'package:flyaway/config/app_config/app_shared_prefences/app_secure_storage.dart';
 import 'package:flyaway/config/app_config/app_textfield_widgets/email_textfield_widget.dart';
 import 'package:flyaway/config/app_config/app_textfield_widgets/textformfield_widget.dart';
 import 'package:flyaway/features/auth_features/widget/icon_button_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../config/app_config/app_font_styles/app_font_styles.dart';
 import 'package:get/get.dart';
 
+import '../../../config/app_config/app_token_generator/app_token_generator.dart';
 import '../controller/auth_controller.dart';
-import '../widget/change_lang_bottom_sheet.dart';
+import '../../../config/app_config/app_change_lang_bottom_sheet/change_lang_bottom_sheet.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -26,6 +29,10 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  LocalStorage? localStorage;
+
+  // token generator function
+  final AppTokenGenerator appTokenGenerator = AppTokenGenerator();
 
   @override
   Widget build(BuildContext context) {
@@ -125,6 +132,11 @@ class _AuthScreenState extends State<AuthScreen> {
                     );
                     return;
                   } else {
+                    localStorage = await LocalStorage.getInstance();
+                    final setToken = await localStorage!.set(
+                      'token',
+                      appTokenGenerator.generateToken(),
+                    );
                     await authController.callAuthApiServices(
                       nameController.text,
                       lastNameController.text,

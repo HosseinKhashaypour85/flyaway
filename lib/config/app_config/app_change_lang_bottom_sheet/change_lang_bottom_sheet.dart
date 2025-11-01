@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../config/app_config/app_localization_config/language_service.dart';
+import '../app_localization_config/language_service.dart';
 
 class LanguageBottomSheet {
   final LanguageService languageService = LanguageService();
