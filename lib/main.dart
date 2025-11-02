@@ -39,12 +39,13 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: lightTheme,
+        theme: AppThemes().lightTheme,
         translations: AppTranslation(),
         locale: LanguageService().currentLocale,
         fallbackLocale: const Locale('fa', 'IR'),
-        darkTheme: darkTheme,
+        darkTheme: AppThemes().darkTheme,
         initialRoute: '/bottomNav',
+        themeMode: themeService.isDarkMode ? ThemeMode.dark : ThemeMode.light,
         getPages: [
           GetPage(name: '/', page: () => const SplashScreen()),
           GetPage(name: '/home', page: () => HomeScreen()),

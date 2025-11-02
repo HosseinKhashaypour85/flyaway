@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flyaway/config/app_config/app_theme_config/app_themes.dart';
+import 'package:flyaway/config/app_config/app_theme_config/theme_service.dart';
 import 'package:flyaway/features/home_features/screen/home_screen.dart';
 import 'package:get/get.dart';
 
@@ -11,26 +13,31 @@ class BottomNavBarScreen extends StatelessWidget {
   static const String screenId = 'bottomNav';
 
   final BottomNavController controller = Get.put(BottomNavController());
+  final ThemeService themeService = ThemeService();
 
   final List<Widget> screenList = [
-    HomeScreen(), // صفحه ۱
-    Container(color: Colors.green), // صفحه ۲
-    Container(color: Colors.blue), // صفحه ۳
-    Container(color: Colors.purple), // صفحه ۳
+    HomeScreen(),
+    Container(color: Colors.green),
+    Container(color: Colors.blue),
+    Container(color: Colors.purple),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final isDark = themeService.isDarkModeRx.value;
+
+    final bgColor = Theme.of(context).bottomNavigationBarTheme.backgroundColor;
+
     return Obx(() {
       return Scaffold(
         body: screenList[controller.currentIndex.value],
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.white,
+          backgroundColor: bgColor,
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.black,
+          // selectedItemColor: Colors.black,
           showSelectedLabels: true,
           showUnselectedLabels: true,
-          unselectedItemColor: Colors.black,
+          // unselectedItemColor: Colors.black,
           selectedLabelStyle: const TextStyle(
             color: primaryColor,
             fontWeight: FontWeight.bold,

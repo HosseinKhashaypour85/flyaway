@@ -80,21 +80,21 @@ class _SearchInputState extends State<SearchInput> {
       height: widget.height ?? 50.h, // Reasonable default height
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(widget.borderRadius.r),
-        boxShadow: _hasFocus || _searchController.text.isNotEmpty
-            ? [
-                BoxShadow(
-                  color: widget.focusColor.withOpacity(0.15),
-                  blurRadius: 8.r, // Reduced blur
-                  offset: Offset(0, 2.h), // Reduced offset
-                ),
-              ]
-            : [
-                BoxShadow(
-                  color: Colors.grey.shade200,
-                  blurRadius: 4.r, // Reduced blur
-                  offset: Offset(0, 1.h), // Reduced offset
-                ),
-              ],
+        // boxShadow: _hasFocus || _searchController.text.isNotEmpty
+        //     ? [
+        //         BoxShadow(
+        //           color: widget.focusColor.withOpacity(0.15),
+        //           blurRadius: 8.r, // Reduced blur
+        //           offset: Offset(0, 2.h), // Reduced offset
+        //         ),
+        //       ]
+        //     : [
+        //         BoxShadow(
+        //           color: Colors.grey.shade200,
+        //           blurRadius: 4.r, // Reduced blur
+        //           offset: Offset(0, 1.h), // Reduced offset
+        //         ),
+        //       ],
       ),
       child: TextField(
         controller: _searchController,

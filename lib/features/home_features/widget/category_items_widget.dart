@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flyaway/config/app_config/app_colors/app_colors.dart';
 import 'package:get/get.dart';
 
 Widget categoryItems() {
@@ -38,7 +39,7 @@ Widget categoryItems() {
             children: [
               Icon(
                 category['icon'],
-                color: Colors.black87,
+                color: primary2Color,
                 size: 28.sp,
               ),
               SizedBox(height: 6.h),
@@ -48,6 +49,7 @@ Widget categoryItems() {
                   fontSize: 12.sp,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'peyda',
+                  color: Colors.black
                 ),
                 textAlign: TextAlign.center,
               ),
