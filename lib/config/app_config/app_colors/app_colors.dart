@@ -10,6 +10,7 @@ const darkColor = Color(0xFF1C1C1C);
 const darkColor2 = Color(0xFF212121);
 const textFieldColor = Color(0xFFF1F2F4);
 const backGroundColor = Color(0xFFFFFFFF);
+const backGroundColor2 = Color(0xFFFEF9F3);
 const buttonBgColor = Color(0xFF00E115);
 // config backGroundColor = Color(0xFFF5F5F5);
 

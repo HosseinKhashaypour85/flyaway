@@ -4,6 +4,7 @@ import 'package:flyaway/config/app_config/app_change_lang_bottom_sheet/change_la
 import 'package:flyaway/config/app_config/app_colors/app_colors.dart';
 import 'package:flyaway/config/app_config/app_elevatedbutton_config/app_button.dart';
 import 'package:flyaway/config/app_config/app_font_styles/app_font_styles.dart';
+import 'package:flyaway/config/app_config/app_search_bar/app_search_bar.dart';
 import 'package:flyaway/config/app_config/app_shapes/border_radius.dart';
 import 'package:flyaway/config/app_config/app_shapes/media_query.dart';
 import 'package:flyaway/features/home_features/controller/home_controller.dart';
@@ -11,6 +12,7 @@ import 'package:get/get.dart';
 
 import '../model/home_row_ticket_model.dart';
 import '../services/home_rows_ticket_api.dart';
+import '../widget/category_maker_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     homeController.onInit();
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: backGroundColor2,
       appBar: AppBar(
         backgroundColor: Colors.blue.shade800,
         elevation: 4,
@@ -53,8 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16.h),
+            Expanded(flex: 1, child: SearchInput()),
+            SizedBox(height: 10.h),
             Expanded(
+              flex: 8,
               child: Obx(() {
                 final data = homeController.ticketRow.value;
                 if (data == null || data.items == null || data.items!.isEmpty) {
@@ -95,8 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(12.sp),
                           image: DecorationImage(
                             image: NetworkImage(items.imageUrl ?? ''),
-                            // تصویر پس‌زمینه
-                            fit: BoxFit.cover, // پوشش کامل
+                            fit: BoxFit.cover,
+                            filterQuality: FilterQuality.high,
                           ),
                           boxShadow: [
                             BoxShadow(
@@ -108,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: Stack(
                           children: [
-                            // گرادیان تیره برای خوانایی متن (اختیاری، از پایین)
                             Positioned.fill(
                               child: Container(
                                 decoration: BoxDecoration(
@@ -147,7 +150,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   SizedBox(height: 4.h),
                                   Text(
                                     'Explore_global_destinations'.tr,
-                                    style: AppFontStyles().FirstFontStyleWidget(13.sp, Colors.white)
+                                    style: AppFontStyles().FirstFontStyleWidget(
+                                      13.sp,
+                                      Colors.white,
+                                    ),
                                   ),
                                   SizedBox(height: 8.h),
                                   SizedBox(
@@ -169,9 +175,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }),
             ),
+            SizedBox(height: 15.h),
+            categoryMaker(),
           ],
         ),
       ),
     );
   }
 }
+
+
+
+

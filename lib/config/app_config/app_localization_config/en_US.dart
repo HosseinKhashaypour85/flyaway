@@ -15,5 +15,16 @@ const Map<String, String> enUS = {
   "current_language": "Current Language",
   "change_language": "Change Language",
   "view_available_tickets" : "View Available Tickets",
-  "Explore_global_destinations" : 'Explore Global Destinations with fly away!'
+  "Explore_global_destinations" : 'Explore Global Destinations with fly away!',
+  "search_box" : "Search",
+  "bottom_nav_home" : "Home",
+  "bottom_nav_search" : "Search",
+  "bottom_nav_trips" : "My trips",
+  "bottom_nav_profile" : "Profile",
+  "categories_text" : "Categories",
+  "hotel" : "Hotel",
+  "airplane" : "Airplane",
+  "train" : "Train",
+  "bus" : "Bus",
+  "taxi" : "Taxi",
 };

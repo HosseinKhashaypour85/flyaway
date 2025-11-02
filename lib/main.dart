@@ -4,6 +4,7 @@ import 'package:flyaway/config/app_config/app_theme_config/app_themes.dart';
 import 'package:flyaway/features/auth_features/screen/auth_screen.dart';
 import 'package:flyaway/features/home_features/screen/home_screen.dart';
 import 'package:flyaway/features/intro_features/screen/splash_screen.dart';
+import 'package:flyaway/features/public_features/screen/bottom_nav_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -43,11 +44,12 @@ class MyApp extends StatelessWidget {
         locale: LanguageService().currentLocale,
         fallbackLocale: const Locale('fa', 'IR'),
         darkTheme: darkTheme,
-        initialRoute: '/home',
+        initialRoute: '/bottomNav',
         getPages: [
           GetPage(name: '/', page: () => const SplashScreen()),
           GetPage(name: '/home', page: () => HomeScreen()),
           GetPage(name: '/auth', page: () => AuthScreen()),
+          GetPage(name: '/bottomNav', page: () => BottomNavBarScreen(),)
         ],
       ),
     );
