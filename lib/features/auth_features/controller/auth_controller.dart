@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   final AuthApiServices _authApiServices = AuthApiServices();
+  RxBool isLoading = false.obs;
 
   Future<void> callAuthApiServices(
     String firstName,
@@ -39,6 +40,7 @@ class AuthController extends GetxController {
           // backgroundColor: Colors.red,
           snackPosition: SnackPosition.TOP,
         );
+        Get.offAllNamed('/bottomNav');
         return;
       }
     } catch (e) {

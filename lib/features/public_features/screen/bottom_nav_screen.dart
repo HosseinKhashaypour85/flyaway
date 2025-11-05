@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flyaway/config/app_config/app_theme_config/app_themes.dart';
 import 'package:flyaway/config/app_config/app_theme_config/theme_service.dart';
 import 'package:flyaway/features/home_features/screen/home_screen.dart';
+import 'package:flyaway/features/search_features/screen/search_screen.dart';
+import 'package:flyaway/features/trip_features/screen/trip_history_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../config/app_config/app_colors/app_colors.dart';
@@ -17,8 +19,8 @@ class BottomNavBarScreen extends StatelessWidget {
 
   final List<Widget> screenList = [
     HomeScreen(),
-    Container(color: Colors.green),
-    Container(color: Colors.blue),
+    SearchScreen(),
+    TripHistoryScreen(),
     Container(color: Colors.purple),
   ];
 

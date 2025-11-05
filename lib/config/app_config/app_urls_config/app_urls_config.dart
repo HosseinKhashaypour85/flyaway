@@ -10,4 +10,5 @@ class AppUrlsConfig {
   static const homeRowsTicket = 'https://hosseinkhashaypour.chbk.app/api/collections/rowTickets/records';
   static const allComments = '$baseUrl/comments';
   static const createComment = '$baseUrl/comments/add';
+  static const getAllTrips = '$baseUrl/tickets';
 }

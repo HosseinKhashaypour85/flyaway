@@ -20,7 +20,7 @@ class SplashController extends GetxController {
     if(getToken == null){
       Get.offAllNamed('/auth');
     } else{
-      Get.offAllNamed('/home');
+      Get.offAllNamed('/bottomNav');
     }
   }
 }
