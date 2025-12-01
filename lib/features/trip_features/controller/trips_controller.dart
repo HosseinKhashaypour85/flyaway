@@ -22,4 +22,5 @@ class TripsController extends GetxController {
     final email = await localStorage!.get('email');
     loadAllTrips(email);
   }
+
 }

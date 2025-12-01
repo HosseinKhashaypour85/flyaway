@@ -41,4 +41,16 @@ const Map<String, String> faIR = {
   "Arrival": "ورود",
   "Flight": "پرواز",
   "Total Price": "قیمت کل",
+  "select_your_seat" : "صندلی خود را انتخاب کنید",
+  "select_your_ticket_info" : 'بلیط خود را انتخاب کنید',
+  'origin': 'مبدا',
+  'destination': 'مقصد',
+  'travelTime': 'زمان بلیط',
+  'passengers': ' مسافران',
+  'originDesc' : 'شهر مبدا را وارد کنید',
+  'destinationDesc' : 'شهر مقصد را وارد کنید',
+  'travelTimeDesc' : 'زمان بلیط را انتخاب کنید',
+  'passengersDesc' : 'تعداد مسافران',
+  'buyTicket' : 'خرید بلیط',
+  'fillAllFieldsToSeePrice' : 'لطفا تمام فیلد های لازم رو پر کنید'
 };

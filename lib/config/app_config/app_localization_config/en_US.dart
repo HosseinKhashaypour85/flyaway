@@ -41,4 +41,16 @@ const Map<String, String> enUS = {
   "Arrival": "Arrival",
   "Flight": "Flight",
   "Total Price": "Total Price",
+  "select_your_seat": "Select Your Seat",
+  'select_your_ticket_info': 'Select Your Ticket Info',
+  'origin': 'origin',
+  'destination': 'destination',
+  'travelTime': 'Travel Time',
+  'passengers': 'passengers',
+  'originDesc' : 'Enter origin city',
+  'destinationDesc' : 'Enter destination city',
+  'travelTimeDesc' : 'Select travel time',
+  'passengersDesc' : 'Number of passengers',
+  'buyTicket' : 'Buy Ticket',
+  'fillAllFieldsToSeePrice' : 'Please fill all fields to see price'
 };

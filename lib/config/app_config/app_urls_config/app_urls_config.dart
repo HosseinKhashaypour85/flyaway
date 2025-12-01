@@ -11,4 +11,5 @@ class AppUrlsConfig {
   static const allComments = '$baseUrl/comments';
   static const createComment = '$baseUrl/comments/add';
   static const getAllTrips = '$baseUrl/tickets';
+  static const payment = '$baseUrl/pay';
 }

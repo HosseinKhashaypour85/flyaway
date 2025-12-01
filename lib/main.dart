@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flyaway/config/app_config/app_theme_config/app_themes.dart';
 import 'package:flyaway/features/auth_features/screen/auth_screen.dart';
@@ -9,6 +10,7 @@ import 'package:flyaway/features/search_features/screen/search_screen.dart';
 import 'package:flyaway/features/trip_features/screen/buy_ticket_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart'; // اضافه کردن این خط
 
 import 'config/app_config/app_localization_config/language_service.dart';
 import 'config/app_config/app_localization_config/translation.dart';
@@ -36,7 +38,6 @@ class MyApp extends StatelessWidget {
     required this.languageService,
   });
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -49,14 +50,25 @@ class MyApp extends StatelessWidget {
         darkTheme: AppThemes().darkTheme,
         initialRoute: '/bottomNav',
         themeMode: themeService.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('fa', 'IR'), // فارسی
+          Locale('en', 'US'), // انگلیسی
+        ],
+
         getPages: [
           GetPage(name: '/', page: () => const SplashScreen()),
           GetPage(name: '/home', page: () => HomeScreen()),
           GetPage(name: '/auth', page: () => AuthScreen()),
-          GetPage(name: '/bottomNav', page: () => BottomNavBarScreen(),),
-          GetPage(name: '/search', page: () => SearchScreen(),),
-          GetPage(name: '/tripsHistory', page: () => TripHistoryScreen(),),
-          GetPage(name: '/buy_ticket', page: () => BuyTicketScreen(),)
+          GetPage(name: '/bottomNav', page: () => BottomNavBarScreen()),
+          GetPage(name: '/search', page: () => SearchScreen()),
+          GetPage(name: '/tripsHistory', page: () => TripHistoryScreen()),
+          GetPage(name: '/buy_ticket', page: () => BuyTicketScreen())
         ],
       ),
     );
