@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flyaway/config/app_config/app_theme_config/app_themes.dart';
 import 'package:flyaway/config/app_config/app_theme_config/theme_service.dart';
 import 'package:flyaway/features/home_features/screen/home_screen.dart';
+import 'package:flyaway/features/profile_features/screen/profile_screen.dart';
 import 'package:flyaway/features/search_features/screen/search_screen.dart';
 import 'package:flyaway/features/trip_features/screen/trip_history_screen.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ class BottomNavBarScreen extends StatelessWidget {
     HomeScreen(),
     SearchScreen(),
     TripHistoryScreen(),
-    Container(color: Colors.purple),
+    ProfileScreen(),
   ];
 
   @override

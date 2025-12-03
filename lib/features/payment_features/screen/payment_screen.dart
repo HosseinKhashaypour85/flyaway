@@ -18,21 +18,28 @@ class _PaymentPageState extends State<PaymentPage> {
   void initState() {
     super.initState();
 
-    final callback = "myapp://payment-result";
+    final callbackUrl = "myapp://payment-result";
     final paymentUrl =
-        "https://flyaway.codeplusdev.ir/api/pay?amount=${widget.amount}&callback=$callback";
+        "https://flyaway.codeplusdev.ir/api/pay?amount=${widget.amount}&callback=$callbackUrl";
 
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onNavigationRequest: (request) {
+          onNavigationRequest: (NavigationRequest request) {
             final url = request.url;
+
+            // وقتی درگاه دیپ‌لینک رو صدا زد:
+            // myapp://payment-result?status=success&amount=...&trackingCode=...
             if (url.startsWith("myapp://payment-result")) {
-              Navigator.pop(context, url); // نتیجه پرداخت برمی‌گرده
+              Navigator.pop(context, url); // URL را به صفحه قبل برمی‌گردانیم
               return NavigationDecision.prevent;
             }
+
             return NavigationDecision.navigate;
+          },
+          onPageStarted: (_) {
+            setState(() => isLoading = true);
           },
           onPageFinished: (_) {
             setState(() => isLoading = false);
@@ -49,7 +56,9 @@ class _PaymentPageState extends State<PaymentPage> {
         children: [
           WebViewWidget(controller: _controller),
           if (isLoading)
-            const Center(child: CircularProgressIndicator()),
+            const Center(
+              child: CircularProgressIndicator(),
+            ),
         ],
       ),
     );

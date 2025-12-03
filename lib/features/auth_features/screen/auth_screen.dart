@@ -29,6 +29,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   LocalStorage? localStorage;
 
@@ -88,7 +89,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   SizedBox(height: 40.sp),
 
                   // Additional Info
-                  _buildAdditionalInfo(),
+                  // _buildAdditionalInfo(),
                 ],
               ),
             ),
@@ -182,17 +183,10 @@ class _AuthScreenState extends State<AuthScreen> {
           SizedBox(height: 20.sp),
 
           _buildTextFieldWithLabel(
-            controller: emailController,
-            label: 'authEmail'.tr,
+            controller: phoneController,
+            label: 'authPhone'.tr,
             icon: Icons.email_outlined,
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'authEmailRequired'.tr;
-              }
-              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                return 'authEmailInvalid'.tr;
-              }
-              return null;
             },
           ),
         ],
@@ -329,67 +323,67 @@ class _AuthScreenState extends State<AuthScreen> {
     });
   }
 
-  Widget _buildAdditionalInfo() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Divider(color: Colors.grey[300], thickness: 1),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.sp),
-              child: Text(
-                'authPrivacy'.tr,
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: Colors.grey[500],
-                  fontFamily: 'kalameh',
-                ),
-              ),
-            ),
-            Expanded(
-              child: Divider(color: Colors.grey[300], thickness: 1),
-            ),
-          ],
-        ),
-        SizedBox(height: 20.sp),
-        Container(
-          padding: EdgeInsets.all(16.sp),
-          decoration: BoxDecoration(
-            color: Colors.green[50],
-            borderRadius: BorderRadius.circular(12.sp),
-            border: Border.all(color: Colors.green[100]!),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 36.sp,
-                height: 36.sp,
-                decoration: BoxDecoration(
-                  color: Colors.green[100],
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(Icons.security, color: Colors.green[600], size: 18.sp),
-              ),
-              SizedBox(width: 12.sp),
-              Expanded(
-                child: Text(
-                  'authPrivacyInfo'.tr,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.green[700],
-                    fontFamily: 'kalameh',
-                    height: 1.4,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _buildAdditionalInfo() {
+  //   return Column(
+  //     children: [
+  //       Row(
+  //         children: [
+  //           Expanded(
+  //             child: Divider(color: Colors.grey[300], thickness: 1),
+  //           ),
+  //           Padding(
+  //             padding: EdgeInsets.symmetric(horizontal: 16.sp),
+  //             child: Text(
+  //               'authPrivacy'.tr,
+  //               style: TextStyle(
+  //                 fontSize: 12.sp,
+  //                 color: Colors.grey[500],
+  //                 fontFamily: 'kalameh',
+  //               ),
+  //             ),
+  //           ),
+  //           Expanded(
+  //             child: Divider(color: Colors.grey[300], thickness: 1),
+  //           ),
+  //         ],
+  //       ),
+  //       SizedBox(height: 20.sp),
+  //       Container(
+  //         padding: EdgeInsets.all(16.sp),
+  //         decoration: BoxDecoration(
+  //           color: Colors.green[50],
+  //           borderRadius: BorderRadius.circular(12.sp),
+  //           border: Border.all(color: Colors.green[100]!),
+  //         ),
+  //         child: Row(
+  //           children: [
+  //             Container(
+  //               width: 36.sp,
+  //               height: 36.sp,
+  //               decoration: BoxDecoration(
+  //                 color: Colors.green[100],
+  //                 shape: BoxShape.circle,
+  //               ),
+  //               child: Icon(Icons.security, color: Colors.green[600], size: 18.sp),
+  //             ),
+  //             SizedBox(width: 12.sp),
+  //             Expanded(
+  //               child: Text(
+  //                 'authPrivacyInfo'.tr,
+  //                 style: TextStyle(
+  //                   fontSize: 12.sp,
+  //                   color: Colors.green[700],
+  //                   fontFamily: 'kalameh',
+  //                   height: 1.4,
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   void _handleSubmit() async {
     if (_formKey.currentState!.validate()) {
@@ -400,12 +394,12 @@ class _AuthScreenState extends State<AuthScreen> {
       );
       final setName = await localStorage!.set('name', nameController.text);
       final setLastName = await localStorage!.set('lastName', lastNameController.text);
-      final setEmail = await localStorage!.set('email', emailController.text);
+      final setPhone = await localStorage!.set('phone', phoneController.text);
 
       await authController.callAuthApiServices(
         nameController.text,
         lastNameController.text,
-        emailController.text,
+        phoneController.text,
       );
     }
   }

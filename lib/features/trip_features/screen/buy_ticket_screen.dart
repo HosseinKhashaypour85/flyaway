@@ -226,7 +226,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
             _buildCityDropdownCard(
               title: "origin".tr,
               hintText: "originDesc".tr,
-              icon: Icons.flight_takeoff_rounded,
+              icon: Icons.trip_origin,
               value: selectedOrigin,
               onChanged: (String? newValue) {
                 setState(() {
@@ -239,7 +239,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
             _buildCityDropdownCard(
               title: "destination".tr,
               hintText: "destinationDesc".tr,
-              icon: Icons.flight_land_rounded,
+              icon: Icons.location_on,
               value: selectedDestination,
               onChanged: (String? newValue) {
                 setState(() {
@@ -648,22 +648,21 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
         height: 55,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: fieldsFilled
-                ? primary2Color
-                : Colors.grey[400],
+            backgroundColor: fieldsFilled ? primary2Color : Colors.grey[400],
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
           ),
 
-          onPressed:
-          ticketController.isLoading.value || !fieldsFilled
+          onPressed: ticketController.isLoading.value || !fieldsFilled
               ? null
               : () async {
-            // ارسال داده به API
+            /// ----------------------------------------
+            /// 1) اول خرید بلیت از سرور
+            /// ----------------------------------------
             final result = await ticketController.buyTicket(
               id: "1",
-              buyerEmail: "test@gmail.com",
+              buyerEmail: "test@gmail.com", // TODO: ایمیل کاربر
               origin: selectedOrigin!,
               destination: selectedDestination!,
               ticketTime: timeController.text,
@@ -672,14 +671,87 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
               passengersAmount: passengersCount,
             );
 
-            // اگر نتیجه null بود → خرید انجام نشد
             if (result == null) {
-              Get.snackbar("Error", ticketController.errorMessage.value);
+              Get.snackbar(
+                "Error",
+                ticketController.errorMessage.value,
+                snackPosition: SnackPosition.BOTTOM,
+              );
               return;
             }
 
+            /// ----------------------------------------
+            /// 2) رفتن به صفحه PaymentPage
+            /// ----------------------------------------
+            final paymentUrl = await Get.to(
+                  () => PaymentPage(amount: totalPrice),
+            );
 
-            Get.to(() => PaymentPage(amount: totalPrice));
+            /// اگر کاربر برگشت بدون پرداخت:
+            if (paymentUrl == null) {
+              Get.snackbar(
+                "Payment Cancelled",
+                "The payment process was not completed.",
+                snackPosition: SnackPosition.BOTTOM,
+              );
+              return;
+            }
+
+            /// ----------------------------------------
+            /// 3) نتیجه پرداخت از دیپ‌لینک
+            /// ----------------------------------------
+            final uri = Uri.parse(paymentUrl);
+            final status = uri.queryParameters['status'];
+            final tracking = uri.queryParameters['trackingCode'] ?? "000";
+
+            ticketController.paymentStatus.value = status ?? "";
+            ticketController.trackingCode.value = tracking;
+
+            /// ----------------------------------------
+            /// 4) اگر پرداخت موفق بود: PDF بساز
+            /// ----------------------------------------
+            if (status == "success") {
+              /// *** نکته کلیدی ***
+              /// قبل از ساخت PDF باید WebView کامل از حافظه خارج شود
+              /// تا پکیج printing با WebView تداخل نکند
+              Get.back(); // PaymentPage را حذف می‌کنیم
+              await Future.delayed(const Duration(milliseconds: 250));
+
+              final pdfFile = await ticketController.generateTicketPdf(
+                buyerEmail: "test@gmail.com",
+                origin: selectedOrigin!,
+                destination: selectedDestination!,
+                ticketTime: timeController.text,
+                amountPaid: totalPrice,
+                ticketType: ticketType!,
+                passengersAmount: passengersCount,
+                trackingCode: tracking,
+              );
+
+              if (pdfFile != null) {
+                /// ----------------------------------------
+                /// 5) نمایش / اشتراک PDF
+                /// ----------------------------------------
+                Future.microtask(() async {
+                  await ticketController.sharePdfFile(pdfFile);
+                });
+              } else {
+                Get.snackbar(
+                  "Error",
+                  "Could not generate PDF file.",
+                  snackPosition: SnackPosition.BOTTOM,
+                );
+              }
+            }
+
+            /// اگر پرداخت ناموفق بود:
+            else {
+              Get.snackbar(
+                "Payment Failed",
+                "Your payment was canceled or failed.",
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }
           },
 
           child: ticketController.isLoading.value
@@ -702,6 +774,9 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
       );
     });
   }
+
+
+
 
 
   // ------------------------------------------------------

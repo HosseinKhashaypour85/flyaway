@@ -27,6 +27,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> subtitleTexts = [
+      'discover_new_adventures'.tr,
+      'plan_your_next_journey'.tr,
+      'travel_the_world_with_us'.tr,
+      'taxi_internet_with_us'.tr,
+    ];
+    final List<String> buttonsText = [
+      'view_available_tickets'.tr,
+      'view_available_tickets'.tr,
+      'view_available_tickets'.tr,
+      'get_taxi'.tr,
+    ];
+
     homeController.onInit();
     return RefreshIndicator(
       onRefresh: () => homeController.loadTicketRowApi(),
@@ -125,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                     SizedBox(height: 4.h),
                                     Text(
-                                      'Explore_global_destinations'.tr,
+                                      subtitleTexts[index],
                                       style: AppFontStyles()
                                           .FirstFontStyleWidget(
                                             13.sp,
@@ -137,30 +150,25 @@ class HomeScreen extends StatelessWidget {
                                       width: double.infinity,
                                       height: 32.h,
                                       child: AppButton.general(
-                                        text: 'view_available_tickets'.tr,
+                                        text: buttonsText[index],
                                         onPressed: () {
                                           if (index == 0) {
                                             Get.toNamed(
                                               '/buy_ticket',
                                               arguments: {
-                                                'ticket_type':
-                                                   'plain',
+                                                'ticket_type': 'plain',
                                               },
                                             );
                                           } else if (index == 1) {
                                             Get.toNamed(
                                               '/buy_ticket',
-                                              arguments: {
-                                                'ticket_type':
-                                                   'bus',
-                                              },
+                                              arguments: {'ticket_type': 'bus'},
                                             );
                                           } else {
                                             Get.toNamed(
                                               '/buy_ticket',
                                               arguments: {
-                                                'ticket_type':
-                                                    'train',
+                                                'ticket_type': 'train',
                                               },
                                             );
                                           }
