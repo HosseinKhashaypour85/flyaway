@@ -6,6 +6,7 @@ import 'package:flyaway/features/auth_features/screen/auth_screen.dart';
 import 'package:flyaway/features/auth_features/screen/otp_auth_confirm_screen.dart';
 import 'package:flyaway/features/home_features/screen/home_screen.dart';
 import 'package:flyaway/features/intro_features/screen/splash_screen.dart';
+import 'package:flyaway/features/profile_features/screen/add_wallet_count.dart';
 import 'package:flyaway/features/profile_features/screen/profile_screen.dart';
 import 'package:flyaway/features/public_features/screen/bottom_nav_screen.dart';
 import 'package:flyaway/features/search_features/screen/search_screen.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
         locale: LanguageService().currentLocale,
         fallbackLocale: const Locale('fa', 'IR'),
         darkTheme: AppThemes().darkTheme,
-        initialRoute: '/',
+        initialRoute: '/bottomNav',
         themeMode: themeService.isDarkMode ? ThemeMode.dark : ThemeMode.light,
 
         localizationsDelegates: const [
@@ -72,7 +73,8 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/search', page: () => SearchScreen()),
           GetPage(name: '/tripsHistory', page: () => TripHistoryScreen()),
           GetPage(name: '/buy_ticket', page: () => BuyTicketScreen()),
-          GetPage(name: '/profile', page: () => ProfileScreen(),)
+          GetPage(name: '/profile', page: () => ProfileScreen(),),
+          GetPage(name: '/add_wallet_count', page: () => AddWalletCount(),)
         ],
       ),
     );

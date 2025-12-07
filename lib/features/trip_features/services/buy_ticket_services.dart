@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flyaway/config/app_config/app_urls_config/app_urls_config.dart';
+
+import '../../../config/app_config/app_urls_config/app_urls_config.dart';
 
 class BuyTicketServices {
   final Dio _dio = Dio(
@@ -19,6 +20,7 @@ class BuyTicketServices {
     required int amountPaid,
     required String ticketType,
     required int passengersAmount,
+    required String buyerPhone,
   }) async {
     try {
       final response = await _dio.post(
@@ -26,6 +28,7 @@ class BuyTicketServices {
         data: {
           'id': id,
           'buyer_email': buyerEmail,
+          'buyer_phone': buyerPhone,
           'origin': origin,
           'destination': destination,
           'ticket_time': ticketTime,
@@ -36,13 +39,9 @@ class BuyTicketServices {
       );
 
       return response;
-
     } on DioException catch (e) {
       print("❌ Buy Ticket API Error → ${e.response?.data}");
-      return e.response; // مهم: null نده، کنترلر خطا رو بخونه
-    } catch (e) {
-      print("❌ Unexpected error → $e");
-      return null;
+      return e.response;
     }
   }
 }

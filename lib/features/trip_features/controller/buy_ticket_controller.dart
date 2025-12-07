@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flyaway/config/app_config/app_shared_prefences/app_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
@@ -31,8 +32,11 @@ class BuyTicketController extends GetxController {
   }) async {
     isLoading.value = true;
     errorMessage.value = '';
+    LocalStorage? localStorage;
 
     try {
+      localStorage = await LocalStorage.getInstance();
+      final buyerPhone = await localStorage!.get('phone');
       final response = await _service.callBuyTicketApi(
         id: id,
         buyerEmail: buyerEmail,
@@ -42,6 +46,7 @@ class BuyTicketController extends GetxController {
         amountPaid: amountPaid,
         ticketType: ticketType,
         passengersAmount: passengersAmount,
+        buyerPhone : buyerPhone
       );
 
       isLoading.value = false;

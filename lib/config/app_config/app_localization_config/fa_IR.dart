@@ -79,4 +79,11 @@ const Map<String, String> faIR = {
   'enterPhoneNumber' : 'شماره تلفن خود را وارد کنید',
   'edit' : 'ویرایش',
   'exitToApp' : 'خروج از حساب کاربری',
+  'walletCount' : 'کیف پول',
+  'paymentsMethod' : 'روش های پرداخت',
+  'yourBalance' : 'موجودی فعلی :',
+  'addCount' : 'افزایش موجودی',
+  'countField' : 'مبلغ مورد نظر',
+  'amountPaid' : 'مبلغ پرداخت شده',
+  'ticketId' : 'شماره بلیط'
 };

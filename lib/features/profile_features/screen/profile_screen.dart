@@ -4,9 +4,11 @@ import 'package:flyaway/config/app_config/app_check_token/app_check_token.dart';
 import 'package:flyaway/config/app_config/app_shapes/border_radius.dart';
 import 'package:flyaway/config/app_config/app_shapes/media_query.dart';
 import 'package:flyaway/config/app_config/app_shared_prefences/app_secure_storage.dart';
+import 'package:flyaway/features/profile_features/controller/profile_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../config/app_config/app_font_styles/app_font_styles.dart';
+import '../../../config/app_config/app_price_format/app_price_format.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -23,6 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? phoneNumber;
   bool isLoading = true;
   bool _isEditing = false;
+  final ProfileController profileController = Get.put(ProfileController());
 
   // Edit form controllers
   final TextEditingController _firstNameController = TextEditingController();
@@ -68,6 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
         isLoading = false;
       });
+      await profileController.getWalletCount(phoneNumber ?? '');
     } catch (e) {
       setState(() {
         isLoading = false;
@@ -559,6 +563,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         _buildInfoCard(Icons.email, 'emailAddress'.tr, email, 'email'),
         _buildInfoCard(Icons.phone, 'phoneNumber'.tr, phoneNumber, 'phone'),
+        GestureDetector(
+          onTap: () => Get.toNamed('/add_wallet_count'),
+          child: Obx(() => _buildInfoCard(
+            Icons.wallet,
+            'walletCount'.tr,
+            formatNumber(profileController.walletCount.value),
+            null,
+          )),
+        ),
+
 
         const SizedBox(height: 24),
 
@@ -893,39 +907,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: isLoading
-            ? _buildLoadingState()
-            : RefreshIndicator(
-                onRefresh: _refreshProfile,
-                color: Colors.blue.shade700,
-                backgroundColor: Colors.white,
-                child: CustomScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  slivers: [SliverToBoxAdapter(child: _buildProfileContent())],
+    profileController.onInit();
+    return RefreshIndicator(
+      onRefresh: () async => profileController.onInit(),
+      child: Scaffold(
+        body: SafeArea(
+          child: isLoading
+              ? _buildLoadingState()
+              : RefreshIndicator(
+                  onRefresh: _refreshProfile,
+                  color: Colors.blue.shade700,
+                  backgroundColor: Colors.white,
+                  child: CustomScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    slivers: [SliverToBoxAdapter(child: _buildProfileContent())],
+                  ),
                 ),
-              ),
+        ),
+        // Floating Action Button with conditional visibility
+        // floatingActionButton: _isEditing
+        //     ? null
+        //     : FloatingActionButton.extended(
+        //         onPressed: () => setState(() {
+        //           _isEditing = true;
+        //         }),
+        //         backgroundColor: Colors.blue.shade700,
+        //         foregroundColor: Colors.white,
+        //         elevation: 4,
+        //         icon: const Icon(Icons.edit),
+        //         label: Text(
+        //           'editProfile'.tr,
+        //           style: AppFontStyles().FirstFontStyleWidget(
+        //             13.sp,
+        //             Colors.white,
+        //           ),
+        //         ),
+        //       ),
       ),
-      // Floating Action Button with conditional visibility
-      floatingActionButton: _isEditing
-          ? null
-          : FloatingActionButton.extended(
-              onPressed: () => setState(() {
-                _isEditing = true;
-              }),
-              backgroundColor: Colors.blue.shade700,
-              foregroundColor: Colors.white,
-              elevation: 4,
-              icon: const Icon(Icons.edit),
-              label: Text(
-                'editProfile'.tr,
-                style: AppFontStyles().FirstFontStyleWidget(
-                  13.sp,
-                  Colors.white,
-                ),
-              ),
-            ),
     );
   }
 }

@@ -79,4 +79,11 @@ const Map<String, String> enUS = {
   'enterPhoneNumber' : 'Enter Phone Number',
   'edit' : 'Edit',
   'exitToApp' : 'log out from my account',
+  'walletCount' : 'wallet count',
+  'paymentsMethod' : 'Payments Method',
+  'yourBalance' : 'Your Balance :',
+  'addCount' : 'Add amount',
+  'countField' : 'Amount',
+  'amountPaid' : 'amount paid',
+  'ticketId' : 'Ticket id'
 };

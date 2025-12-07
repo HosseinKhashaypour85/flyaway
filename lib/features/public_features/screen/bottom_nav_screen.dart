@@ -20,7 +20,6 @@ class BottomNavBarScreen extends StatelessWidget {
 
   final List<Widget> screenList = [
     HomeScreen(),
-    SearchScreen(),
     TripHistoryScreen(),
     ProfileScreen(),
   ];
@@ -59,11 +58,11 @@ class BottomNavBarScreen extends StatelessWidget {
               icon: Icon(Icons.home_outlined),
               activeIcon: Icon(Icons.home),
             ),
-            BottomNavigationBarItem(
-              label: "bottom_nav_search".tr,
-              icon: Icon(Icons.search_outlined),
-              activeIcon: Icon(Icons.search),
-            ),
+            // BottomNavigationBarItem(
+            //   label: "bottom_nav_search".tr,
+            //   icon: Icon(Icons.search_outlined),
+            //   activeIcon: Icon(Icons.search),
+            // ),
             BottomNavigationBarItem(
               label: 'bottom_nav_trips'.tr,
               icon: Icon(Icons.airplane_ticket_outlined),

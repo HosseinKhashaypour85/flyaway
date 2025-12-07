@@ -156,7 +156,7 @@ class HomeScreen extends StatelessWidget {
                                             Get.toNamed(
                                               '/buy_ticket',
                                               arguments: {
-                                                'ticket_type': 'plain',
+                                                'ticket_type': 'plane',
                                               },
                                             );
                                           } else if (index == 1) {

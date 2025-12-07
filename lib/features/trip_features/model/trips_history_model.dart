@@ -12,25 +12,19 @@ class TripsHistoryModel {
   }
   List<Tickets>? tickets;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (tickets != null) {
-      map['tickets'] = tickets?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+
 
 }
 
 class Tickets {
   Tickets({
-      this.id, 
-      this.buyerEmail, 
-      this.origin, 
-      this.destination, 
-      this.ticketTime, 
-      this.amountPaid, 
-      this.ticketType, 
+      this.id,
+      this.buyerEmail,
+      this.origin,
+      this.destination,
+      this.ticketTime,
+      this.amountPaid,
+      this.ticketType,
       this.passengersAmount,});
 
   Tickets.fromJson(dynamic json) {
@@ -42,6 +36,7 @@ class Tickets {
     amountPaid = json['amount_paid'];
     ticketType = json['ticket_type'];
     passengersAmount = json['passengers_amount'];
+    buyerPhone = json['buyer_phone'];
   }
   int? id;
   String? buyerEmail;
@@ -51,18 +46,6 @@ class Tickets {
   String? amountPaid;
   String? ticketType;
   int? passengersAmount;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['buyer_email'] = buyerEmail;
-    map['origin'] = origin;
-    map['destination'] = destination;
-    map['ticket_time'] = ticketTime;
-    map['amount_paid'] = amountPaid;
-    map['ticket_type'] = ticketType;
-    map['passengers_amount'] = passengersAmount;
-    return map;
-  }
+  String? buyerPhone;
 
 }

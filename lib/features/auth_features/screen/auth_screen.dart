@@ -185,7 +185,7 @@ class _AuthScreenState extends State<AuthScreen> {
           _buildTextFieldWithLabel(
             controller: phoneController,
             label: 'authPhone'.tr,
-            icon: Icons.email_outlined,
+            icon: Icons.phone_android,
             validator: (value) {
             },
           ),

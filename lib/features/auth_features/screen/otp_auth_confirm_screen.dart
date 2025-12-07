@@ -19,7 +19,7 @@ class OtpAuthConfirmScreen extends StatefulWidget {
 }
 
 class _OtpAuthConfirmScreenState extends State<OtpAuthConfirmScreen> {
-  final AuthController _authController = Get.find<AuthController>();
+  final AuthController _authController = Get.put(AuthController());
   final List<TextEditingController> _otpControllers = List.generate(6, (_) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
   final Color primaryBlue = const Color(0xFF2196F3);
