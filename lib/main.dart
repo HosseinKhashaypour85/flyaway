@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         locale: LanguageService().currentLocale,
         fallbackLocale: const Locale('fa', 'IR'),
         darkTheme: AppThemes().darkTheme,
-        initialRoute: '/bottomNav',
+        initialRoute: '/',
         themeMode: themeService.isDarkMode ? ThemeMode.dark : ThemeMode.light,
 
         localizationsDelegates: const [
