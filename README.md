@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+## 📱 Download APK
+
+[![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](https://github.com/HosseinKhashaypour85/flyaway/releases/latest/download/app-release.apk)
+
+**Latest Release:** [View All Releases](https://github.com/HosseinKhashaypour85/flyaway/releases)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

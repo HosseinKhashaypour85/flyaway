@@ -38,9 +38,26 @@ jobs:
         name: flutter-apk-${{ github.event.inputs.build_type }}
         path: build/app/outputs/flutter-apk/app-${{ github.event.inputs.build_type }}.apk
 
-    - name: Create download link
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: apk-${{ github.event.inputs.build_type }}-${{ github.run_number }}
+        name: APK Build ${{ github.event.inputs.build_type }} #${{ github.run_number }}
+        body: |
+          🚀 **Flutter APK Build**
+
+          **Build Type:** ${{ github.event.inputs.build_type }}
+          **Build Number:** ${{ github.run_number }}
+          **Commit:** ${{ github.sha }}
+
+          📥 **Download APK:** [flutter-apk-${{ github.event.inputs.build_type }}.apk](https://github.com/${{ github.repository }}/releases/download/apk-${{ github.event.inputs.build_type }}-${{ github.run_number }}/flutter-apk-${{ github.event.inputs.build_type }}.apk)
+        files: build/app/outputs/flutter-apk/app-${{ github.event.inputs.build_type }}.apk
+        draft: false
+        prerelease: ${{ github.event.inputs.build_type == 'debug' }}
+
+    - name: Create download link summary
       run: |
         echo "## 📱 Flutter APK Build Complete!" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "**Build Type:** ${{ github.event.inputs.build_type }}" >> $GITHUB_STEP_SUMMARY
-        echo "**Download APK:** [flutter-apk-${{ github.event.inputs.build_type }}.apk](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
+        echo "**Download APK:** [flutter-apk-${{ github.event.inputs.build_type }}.apk](https://github.com/${{ github.repository }}/releases/download/apk-${{ github.event.inputs.build_type }}-${{ github.run_number }}/flutter-apk-${{ github.event.inputs.build_type }}.apk)" >> $GITHUB_STEP_SUMMARY
