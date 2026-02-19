@@ -50,7 +50,7 @@ jobs:
           **Build Number:** ${{ github.run_number }}
           **Commit:** ${{ github.sha }}
 
-          📥 **Download APK:** [flutter-apk-${{ github.event.inputs.build_type }}.apk](https://github.com/${{ github.repository }}/releases/download/apk-${{ github.event.inputs.build_type }}-${{ github.run_number }}/flutter-apk-${{ github.event.inputs.build_type }}.apk)
+          📥 **Download APK:** [app-${{ github.event.inputs.build_type }}.apk](https://github.com/${{ github.repository }}/releases/download/apk-${{ github.event.inputs.build_type }}-${{ github.run_number }}/app-${{ github.event.inputs.build_type }}.apk)
         files: build/app/outputs/flutter-apk/app-${{ github.event.inputs.build_type }}.apk
         draft: false
         prerelease: ${{ github.event.inputs.build_type == 'debug' }}
@@ -60,4 +60,4 @@ jobs:
         echo "## 📱 Flutter APK Build Complete!" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "**Build Type:** ${{ github.event.inputs.build_type }}" >> $GITHUB_STEP_SUMMARY
-        echo "**Download APK:** [flutter-apk-${{ github.event.inputs.build_type }}.apk](https://github.com/${{ github.repository }}/releases/download/apk-${{ github.event.inputs.build_type }}-${{ github.run_number }}/flutter-apk-${{ github.event.inputs.build_type }}.apk)" >> $GITHUB_STEP_SUMMARY
+        echo "**Download APK:** [app-${{ github.event.inputs.build_type }}.apk](https://github.com/${{ github.repository }}/releases/download/apk-${{ github.event.inputs.build_type }}-${{ github.run_number }}/app-${{ github.event.inputs.build_type }}.apk)" >> $GITHUB_STEP_SUMMARY
