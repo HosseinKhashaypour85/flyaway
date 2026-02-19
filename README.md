@@ -2,9 +2,18 @@
 
 A new Flutter project.
 
-## 📱 Download APK
+## 📱 Build & Download APK
 
-[![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](https://github.com/HosseinKhashaypour85/flyaway/releases/latest/download/app-release.apk)
+### روش ۱: کلیک برای شروع Build (توصیه شده)
+[![Build APK](https://img.shields.io/badge/Build_APK-Click_to_Start-blue?style=for-the-badge&logo=github)](https://github.com/HosseinKhashaypour85/flyaway/actions)
+
+### روش ۲: دانلود APK آماده (اگر موجود باشد)
+[![Download Latest APK](https://img.shields.io/badge/Download_Latest_APK-green?style=for-the-badge&logo=android)](https://github.com/HosseinKhashaypour85/flyaway/releases/latest/download/app-release.apk)
+
+### روش ۳: اجرای اسکریپت محلی (برای توسعه‌دهندگان)
+```bash
+./build-apk.sh
+```
 
 **Latest Release:** [View All Releases](https://github.com/HosseinKhashaypour85/flyaway/releases)
 
