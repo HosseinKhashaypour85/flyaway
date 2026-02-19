@@ -41,7 +41,7 @@ dependencies:
   get_storage: ^2.1.1
   flutter_cube: ^0.1.1
   popover: ^0.4.0
-  persian_datetime_picker: ^3.2.0
+  persian_datetime_picker: ^3.1.1
   pdf: ^3.11.3
   printing: ^5.14.2
 
