@@ -10,7 +10,7 @@ class AppUrlsConfig {
   static const getWalletCount = '$baseUrl/users/wallet/find_wallet';
   static const addAmountToWallet = '$baseUrl/users/wallet/add_amount';
   static const decreaseAmountOfWallet = '$baseUrl/users/wallet/decrease_amount';
-  static const homeRowsTicket = 'https://hosseinkhashaypour.chbk.app/api/collections/rowTickets/records';
+  static const homeRowsTicket = 'https://hosseinkhashaypour.chbk.dev/api/collections/rowTickets/records';
   static const allComments = '$baseUrl/comments';
   static const createComment = '$baseUrl/comments/add';
   static const getAllTrips = '$baseUrl/tickets';
